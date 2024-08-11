@@ -1,22 +1,27 @@
-// src/App.jsx
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import WelcomeMessage from './components/WelcomeMessage';  // Import the WelcomeMessage component
-import Header from './components/Header';                  // Import the Header component
-import MainContent from './components/MainContent';        // Import the MainContent component
-import Footer from './components/Footer';                  // Import the Footer component
+import WelcomeMessage from './components/WelcomeMessage';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Header />            {/* Include the Header component */}
-      <MainContent />      {/* Include the MainContent component */}
-      <WelcomeMessage />   {/* Include the WelcomeMessage component */}
-      <Footer />           {/* Include the Footer component */}
+      <Header />
+      <MainContent />
+      <WelcomeMessage />
+      <UserProfile 
+        name="Alice" 
+        age="25" 
+        bio="Loves hiking and photography" 
+      />
+      <Footer />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
