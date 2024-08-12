@@ -1,12 +1,18 @@
-// src/UserContext.js
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-// Create Context
+// Create a Context for user data
 const UserContext = createContext();
 
 // Create a provider component
 export function UserProvider({ children }) {
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+  const [userData, setUserData] = useState({
+    name: "Jane Doe",
+    email: "jane.doe@example.com"
+  });
+
+  // You can add methods to update the user data here if needed
+  // Example:
+  // const updateUser = (newData) => setUserData(newData);
 
   return (
     <UserContext.Provider value={userData}>
@@ -15,7 +21,7 @@ export function UserProvider({ children }) {
   );
 }
 
-// Create a custom hook for using context
+// Create a custom hook to use the UserContext
 export function useUser() {
   return useContext(UserContext);
 }
