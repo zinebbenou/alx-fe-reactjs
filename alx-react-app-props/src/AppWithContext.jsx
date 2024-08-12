@@ -1,10 +1,12 @@
-// src/AppWithContext.jsx
 import React from 'react';
-import ProfilePage from './components/ProfilePage'; // Import ProfilePage component
+import { UserProvider } from './UserContext'; // Importing UserProvider from UserContext.js
+import App from './App'; // Your main App component
 
 function AppWithContext() {
   return (
-    <ProfilePage /> {/* No need to pass userData as a prop */}
+    <UserProvider>
+      <App />
+    </UserProvider>
   );
 }
 
