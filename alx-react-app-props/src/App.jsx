@@ -6,7 +6,7 @@ function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
-    <UserProvider userData={userData}>
+    <UserProvider value={userData}>
       <ProfilePage />
     </UserProvider>
   );
