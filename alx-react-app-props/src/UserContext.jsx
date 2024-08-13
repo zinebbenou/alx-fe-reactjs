@@ -3,7 +3,7 @@ import React, { createContext, useContext } from 'react';
 // Create a Context for user data
 const UserContext = createContext();
 
-// Create a Provider component
+// Create a provider component
 export const UserProvider = ({ children, userData }) => {
   return (
     <UserContext.Provider value={userData}>
@@ -12,7 +12,7 @@ export const UserProvider = ({ children, userData }) => {
   );
 };
 
-// Create a custom hook to use the UserContext
-export const useUser = () => {
-  return useContext(UserContext);
-};
+// Create a custom hook for using the context
+export const useUser = () => useContext(UserContext);
+
+export default UserContext;
