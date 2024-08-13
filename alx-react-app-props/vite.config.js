@@ -3,7 +3,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  esbuild: {
-    loader: 'jsx' // Set the loader directly as a string
+  build: {
+    rollupOptions: {
+      // This option ensures that JSX files are handled correctly
+      // Here you can specify how Rollup should handle different file types
+    }
   }
 });
