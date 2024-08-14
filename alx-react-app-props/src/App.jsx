@@ -7,7 +7,7 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
-import UserContext, { UserProvider } from './UserContext'; // Import UserContext and UserProvider
+import UserContext, { UserProvider } from './components/UserContext'; // Correct import
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <UserProvider value={userData}> {/* Wrap components with UserProvider */}
+    <UserProvider> {/* Wrap components with UserProvider */}
       <Header />
       <MainContent />
       <WelcomeMessage />
