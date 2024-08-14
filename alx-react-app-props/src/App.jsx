@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -7,7 +7,7 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
-import UserContext, { UserProvider } from './components/UserContext'; // Correct import
+import UserContext from './components/UserContext'; // Import UserContext
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <UserProvider> {/* Wrap components with UserProvider */}
+    <UserContext.Provider value={{ user: userData, setUser: () => {} }}> {/* Directly use UserContext.Provider */}
       <Header />
       <MainContent />
       <WelcomeMessage />
@@ -45,7 +45,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </UserProvider>
+    </UserContext.Provider>
   );
 }
 
