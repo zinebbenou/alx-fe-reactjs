@@ -1,23 +1,27 @@
-// src/components/DeleteRecipeButton.jsx
+import create from 'zustand';
 
-import React from 'react';
-import { useRecipeStore } from '../recipeStore';
+const useRecipeStore = create((set) => ({
+  recipes: [],
 
-const DeleteRecipeButton = ({ recipeId }) => {
-  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
+  // Action to add a new recipe
+  addRecipe: (newRecipe) => set((state) => ({
+    recipes: [...state.recipes, newRecipe],
+  })),
 
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this recipe?')) {
-      deleteRecipe(recipeId);
-    }
-  };
+  // Action to update an existing recipe
+  updateRecipe: (updatedRecipe) => set((state) => ({
+    recipes: state.recipes.map((recipe) =>
+      recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+    ),
+  })),
 
-  return (
-    <button onClick={handleDelete} style={{ color: 'red' }}>
-      Delete Recipe
-    </button>
-  );
-};
+  // Action to delete a recipe by ID
+  deleteRecipe: (id) => set((state) => ({
+    recipes: state.recipes.filter((recipe) => recipe.id !== id),
+  })),
 
-export default DeleteRecipeButton;
+  // Optional: Set recipes from an external source (e.g., initialization)
+  setRecipes: (recipes) => set({ recipes }),
+}));
 
+export { useRecipeStore };
