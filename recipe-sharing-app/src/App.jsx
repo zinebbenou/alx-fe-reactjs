@@ -1,15 +1,20 @@
 // src/App.jsx
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import RecipeDetails from "./components/RecipeDetails"; // Adjust this path based on where RecipeDetails is located
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import RecipeList from './components/RecipeList';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
-        {/* Add other routes here */}
-      </Routes>
+      <div>
+        <SearchBar />
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          {/* Other routes */}
+        </Routes>
+      </div>
     </Router>
   );
 }
