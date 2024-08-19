@@ -1,22 +1,24 @@
 // src/App.jsx
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
-import SearchBar from './components/SearchBar';
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeDetail from './components/RecipeDetail'; // Ensure this import path is correct
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
-        <SearchBar />
+        <h1>Recipe Sharing App</h1>
         <Routes>
           <Route path="/" element={<RecipeList />} />
-          {/* Other routes */}
+          <Route path="/add-recipe" element={<AddRecipeForm />} />
+          <Route path="/recipes/:id" element={<RecipeDetail />} />
         </Routes>
       </div>
     </Router>
   );
-}
+};
 
 export default App;

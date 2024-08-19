@@ -1,27 +1,26 @@
 // src/components/RecipeList.jsx
 
 import React from 'react';
-import { useRecipeStore } from './recipeStore';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import { useRecipeStore } from '../recipeStore';
 
 const RecipeList = () => {
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
-  const filterRecipes = useRecipeStore((state) => state.filterRecipes);
-
-  // Trigger filtering when the component renders or the search term changes
-  React.useEffect(() => {
-    filterRecipes();
-  }, [filterRecipes]);
+  const recipes = useRecipeStore((state) => state.filteredRecipes);
 
   return (
     <div>
-      {filteredRecipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h2>{recipe.title}</h2>
-          {/* Link to the recipe details page */}
-          <Link to={`/recipes/${recipe.id}`}>View Details</Link>
-        </div>
-      ))}
+      <h2>Recipe List</h2>
+      {recipes.length > 0 ? (
+        <ul>
+          {recipes.map((recipe) => (
+            <li key={recipe.id}>
+              <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No recipes found.</p>
+      )}
     </div>
   );
 };
