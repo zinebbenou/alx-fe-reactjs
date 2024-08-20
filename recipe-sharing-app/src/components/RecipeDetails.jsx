@@ -17,6 +17,7 @@ const RecipeDetail = () => {
 
   return (
     <div>
+      <h2>Recipe ID: {recipe.id}</h2> {/* Added this line to include recipe.id */}
       <h2>{recipe.title}</h2>
       <p>{recipe.description}</p>
       <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
