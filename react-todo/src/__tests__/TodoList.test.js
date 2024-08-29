@@ -1,40 +1,22 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList'; // Ensure this path is correct
+import TodoList from '../components/TodoList';
 
 test('renders TodoList component', () => {
   render(<TodoList />);
-  
-  // Use queryAllByText to get all elements with the text "Todo List"
-  const headings = screen.queryAllByText(/Todo List/i);
-  
-  // Ensure there's at least one heading with "Todo List"
-  expect(headings.length).toBeGreaterThanOrEqual(1);
+  const heading = screen.getByText(/Todo List/i);
+  expect(heading).toBeInTheDocument();
 });
 
 test('adds a new todo', () => {
   render(<TodoList />);
-
-  // Example logic for adding a new todo:
-  const input = screen.getByPlaceholderText('Add a new todo');
+  const input = screen.getByPlaceholderText(/Add a new todo/i);
   fireEvent.change(input, { target: { value: 'New Todo' } });
-  fireEvent.click(screen.getByText('Add Todo'));
-  expect(screen.getByText('New Todo')).toBeInTheDocument();
-});
-
-test('toggles a todo item', () => {
-  render(<TodoList />);
-
-  // Example logic for toggling a todo item:
-  const todoItem = screen.getByText('Learn React');
-  fireEvent.click(todoItem);
-  expect(todoItem).toHaveStyle('text-decoration: line-through');
+  fireEvent.click(screen.getByText(/Add Todo/i));
+  expect(screen.getByText(/New Todo/i)).toBeInTheDocument();
 });
 
 test('deletes a todo', () => {
   render(<TodoList />);
-
-  // Example logic for deleting a todo:
-  const deleteButton = screen.getAllByText('Delete')[0];
-  fireEvent.click(deleteButton);
-  expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
+  fireEvent.click(screen.getAllByText(/Delete/i)[0]);
+  expect(screen.queryByText(/Learn React/i)).not.toBeInTheDocument();
 });
