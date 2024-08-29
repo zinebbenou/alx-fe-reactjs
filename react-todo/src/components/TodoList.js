@@ -1,19 +1,33 @@
+// src/components/TodoList.js
+
 import React, { useState } from 'react';
 
 function TodoList() {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState([
+    { text: 'Learn React', completed: false },
+    { text: 'Build a Todo List', completed: false },
+    { text: 'Write Tests', completed: false },
+  ]);
+  const [newTodo, setNewTodo] = useState('');
 
   const addTodo = (e) => {
     e.preventDefault();
-    if (inputValue.trim()) {
-      setTodos([...todos, inputValue.trim()]);
-      setInputValue('');
+    if (newTodo.trim()) {
+      setTodos([...todos, { text: newTodo, completed: false }]);
+      setNewTodo('');
     }
   };
 
-  const removeTodo = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
+  const toggleTodo = (index) => {
+    const updatedTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
+  const deleteTodo = (index) => {
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    setTodos(updatedTodos);
   };
 
   return (
@@ -22,17 +36,21 @@ function TodoList() {
       <form onSubmit={addTodo}>
         <input
           type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add a new todo"
         />
         <button type="submit">Add Todo</button>
       </form>
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
-            <button onClick={() => removeTodo(index)}>Delete</button>
+          <li
+            key={index}
+            style={{ textDecoration: todo.completed ? 'line-through' : 'none', cursor: 'pointer' }}
+            onClick={() => toggleTodo(index)}
+          >
+            {todo.text}
+            <button onClick={(e) => { e.stopPropagation(); deleteTodo(index); }}>Delete</button>
           </li>
         ))}
       </ul>
