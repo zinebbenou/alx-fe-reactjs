@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-  // State variables to handle form input values
+  // State variables for form fields
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // State for handling errors
+  const [errors, setErrors] = useState({});
 
   // Handlers to update state based on input changes
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
+  // Function to validate form fields
+  const validate = () => {
+    const errors = {};
+    if (!username) errors.username = 'Username is required';
+    if (!email) errors.email = 'Email is required';
+    if (!password) errors.password = 'Password is required';
+    return errors;
+  };
+
   // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation to ensure no fields are empty
-    if (!username || !email || !password) {
-      alert('All fields are required.');
+    // Validate the form
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    // If there are any errors, stop the submission
+    if (Object.keys(validationErrors).length > 0) {
       return;
     }
 
@@ -25,7 +40,6 @@ const RegistrationForm = () => {
     console.log('Form submitted:', { username, email, password });
   };
 
-  // Render the form with controlled input fields
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -33,27 +47,30 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={username}          // Controlled value
-          onChange={handleUsernameChange}  // Update state on change
+          value={username}
+          onChange={handleUsernameChange}
         />
+        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
       </div>
       <div>
         <label>Email:</label>
         <input
           type="email"
           name="email"
-          value={email}             // Controlled value
-          onChange={handleEmailChange}   // Update state on change
+          value={email}
+          onChange={handleEmailChange}
         />
+        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
       </div>
       <div>
         <label>Password:</label>
         <input
           type="password"
           name="password"
-          value={password}          // Controlled value
-          onChange={handlePasswordChange}  // Update state on change
+          value={password}
+          onChange={handlePasswordChange}
         />
+        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
       </div>
       <button type="submit">Register</button>
     </form>
