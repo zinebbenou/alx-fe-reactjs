@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  // State variables to handle form input values
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+  // Handlers to update state based on input changes
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
 
+  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
+
+    // Basic validation to ensure no fields are empty
+    if (!username || !email || !password) {
       alert('All fields are required.');
       return;
     }
-    console.log('Form submitted', formData);
+
+    // Simulate form submission
+    console.log('Form submitted:', { username, email, password });
   };
 
+  // Render the form with controlled input fields
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -31,8 +33,8 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
+          value={username}          // Controlled value
+          onChange={handleUsernameChange}  // Update state on change
         />
       </div>
       <div>
@@ -40,8 +42,8 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}             // Controlled value
+          onChange={handleEmailChange}   // Update state on change
         />
       </div>
       <div>
@@ -49,8 +51,8 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}          // Controlled value
+          onChange={handlePasswordChange}  // Update state on change
         />
       </div>
       <button type="submit">Register</button>
