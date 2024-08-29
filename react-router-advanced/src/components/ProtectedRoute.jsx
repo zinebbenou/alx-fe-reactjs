@@ -1,1 +1,16 @@
-file://%20src/components/ProtectedRoute.jsximport%20React%20from%20'react';import%20%7B%20Navigate%20%7D%20from%20'react-router-dom';const%20ProtectedRoute%20=%20(%7B%20element,%20isAuthenticated%20%7D)%20=%3E%20%7B%20%20return%20isAuthenticated%20?%20element%20:%20%3CNavigate%20to=%22/%22%20/%3E;};export%20default%20ProtectedRoute;
+// src/components/ProtectedRoute.jsx
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth'; // Import the useAuth hook if using it
+
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useAuth(); // Use the hook to check authentication status
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" />; // Redirect to home page if not authenticated
+  }
+
+  return children; // Render the children (protected content) if authenticated
+};
+
+export default ProtectedRoute;
