@@ -1,0 +1,1 @@
+file://%20src/pages/BlogPost.jsximport%20React%20from%20'react';import%20%7B%20useParams%20%7D%20from%20'react-router-dom';const%20BlogPost%20=%20()%20=%3E%20%7B%20%20const%20%7B%20postId%20%7D%20=%20useParams();%20%20return%20%3Cdiv%3EDisplaying%20post%20with%20ID:%20%7BpostId%7D%3C/div%3E;%7D;export%20default%20BlogPost;

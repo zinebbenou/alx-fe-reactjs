@@ -1,0 +1,1 @@
+file://%20src/pages/Home.jsximport%20React%20from%20'react';const%20Home%20=%20()%20=%3E%20%7B%20%20return%20%3Cdiv%3EWelcome%20to%20the%20Home%20Page!%3C/div%3E;%7D;export%20default%20Home;
