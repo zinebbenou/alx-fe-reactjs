@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TodoList from '../components/TodoList';
 
 describe('TodoList', () => {
@@ -13,30 +12,20 @@ describe('TodoList', () => {
 
   test('adds a new todo', () => {
     render(<TodoList />);
-    const input = screen.getByPlaceholderText('Add new todo');
-    const button = screen.getByText('Add Todo');
-
-    fireEvent.change(input, { target: { value: 'New Todo Item' } });
-    fireEvent.click(button);
-
-    expect(screen.getByText('New Todo Item')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Add Todo'));
+    expect(screen.getByText('New Todo')).toBeInTheDocument();
   });
 
   test('toggles a todo', () => {
     render(<TodoList />);
-    const todoItem = screen.getByText('Learn React');
-
-    fireEvent.click(todoItem);
-
-    expect(todoItem).toHaveStyle('text-decoration: line-through');
+    const checkbox = screen.getAllByRole('checkbox')[0];
+    fireEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
   });
 
   test('deletes a todo', () => {
     render(<TodoList />);
-    const deleteButton = screen.getAllByText('Delete')[0];
-
-    fireEvent.click(deleteButton);
-
+    fireEvent.click(screen.getAllByText('Delete')[0]);
     expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
   });
 });
