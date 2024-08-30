@@ -1,43 +1,38 @@
 import React, { useState } from 'react';
 
-const RegistrationForm = () => {
-  // State variables for form fields
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // State for handling errors
+function RegistrationForm() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
   const [errors, setErrors] = useState({});
 
-  // Handlers to update state based on input changes
-  const handleUsernameChange = (e) => setUsername(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-  // Function to validate form fields
   const validate = () => {
-    const errors = {};
-    if (!username) errors.username = 'Username is required';
-    if (!email) errors.email = 'Email is required';
-    if (!password) errors.password = 'Password is required';
+    let errors = {};
+    if (!formData.username) errors.username = 'Username is required';
+    if (!formData.email) errors.email = 'Email is required';
+    if (!formData.password) errors.password = 'Password is required';
     return errors;
   };
 
-  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validate the form
     const validationErrors = validate();
-    setErrors(validationErrors);
-
-    // If there are any errors, stop the submission
-    if (Object.keys(validationErrors).length > 0) {
-      return;
+    if (Object.keys(validationErrors).length === 0) {
+      console.log('Form data submitted:', formData);
+      // Add API call logic here
+    } else {
+      setErrors(validationErrors);
     }
-
-    // Simulate form submission
-    console.log('Form submitted:', { username, email, password });
   };
 
   return (
@@ -47,34 +42,34 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={username}
-          onChange={handleUsernameChange}
+          value={formData.username}
+          onChange={handleChange}
         />
-        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
+        {errors.username && <span>{errors.username}</span>}
       </div>
       <div>
         <label>Email:</label>
         <input
           type="email"
           name="email"
-          value={email}
-          onChange={handleEmailChange}
+          value={formData.email}
+          onChange={handleChange}
         />
-        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+        {errors.email && <span>{errors.email}</span>}
       </div>
       <div>
         <label>Password:</label>
         <input
           type="password"
           name="password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={formData.password}
+          onChange={handleChange}
         />
-        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+        {errors.password && <span>{errors.password}</span>}
       </div>
       <button type="submit">Register</button>
     </form>
   );
-};
+}
 
 export default RegistrationForm;
