@@ -1,15 +1,8 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App'; // Adjust the import path if necessary
-import { act } from 'react'; // Updated import
+import App from './App';
 
-// Ensure you clear all timers after each test
-afterEach(() => {
-  jest.clearAllTimers();
-});
-
-test('renders Todo List', () => {
+test('renders learn react link', () => {
   render(<App />);
-  const headingElement = screen.getByText(/Todo List/i);
-  expect(headingElement).toBeInTheDocument();
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
 });
