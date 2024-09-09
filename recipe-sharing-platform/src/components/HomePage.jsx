@@ -1,7 +1,7 @@
 // src/components/HomePage.jsx
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
-import data from '../data.json';  // Import the mock data
+import { Link } from 'react-router-dom';
+import data from '../data.json';
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -12,7 +12,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {recipes.map(recipe => (
         <div key={recipe.id} className="card bg-gray-800 text-white p-6 rounded-lg shadow-lg">
           <img src={recipe.image} alt={recipe.title} className="w-full h-40 object-cover rounded-lg mb-4"/>
