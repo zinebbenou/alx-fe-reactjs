@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-family-default: theme('fontFamily.default');
+  --font-size-h1: theme('fontSize.h1');
+  --line-height-h1: theme('lineHeight.h1');
+  --border-radius-button: theme('borderRadius.button');
+  --padding-button: theme('padding.button');
+  --transition-border: theme('transitionProperty.border');
+  --color-primary: theme('colors.primary');
+  --color-primary-hover: theme('colors.primary-hover');
+  --color-background-dark: theme('colors.background-dark');
+  --color-background-light: theme('colors.background-light');
+  --color-text-dark: theme('colors.text-dark');
+  --color-button-background-dark: theme('colors.button-background-dark');
+  --color-button-background-light: theme('colors.button-background-light');
+}
+
+body {
+  font-family: var(--font-family-default);
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-text-dark);
+  background-color: var(--color-background-dark);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+}
+
+button {
+  border-radius: var(--border-radius-button);
+  border: 1px solid transparent;
+  padding: var(--padding-button);
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-button-background-dark);
+  cursor: pointer;
+  transition: var(--transition-border) 0.25s;
+}
+button:hover {
+  border-color: var(--color-primary);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--color-text-dark);
+    background-color: var(--color-background-light);
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: var(--color-button-background-light);
+  }
+}
