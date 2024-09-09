@@ -40,6 +40,7 @@ a {
   color: var(--color-primary);
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--color-primary-hover);
 }
@@ -60,12 +61,43 @@ button {
   cursor: pointer;
   transition: var(--transition-border) 0.25s;
 }
+
 button:hover {
   border-color: var(--color-primary);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Recipe Detail Page Styles */
+.recipe-detail {
+  @apply container mx-auto p-4;
+}
+
+.recipe-detail img {
+  @apply w-full h-auto mb-4;
+}
+
+.recipe-detail .title {
+  @apply text-4xl font-bold mb-4;
+}
+
+.recipe-detail .section {
+  @apply bg-white p-4 rounded-lg shadow-lg;
+}
+
+.recipe-detail .section h2 {
+  @apply text-2xl font-semibold mb-2;
+}
+
+.recipe-detail .section ul {
+  @apply list-disc pl-5 mb-4;
+}
+
+.recipe-detail .section li {
+  @apply mb-1;
 }
 
 @media (prefers-color-scheme: light) {
@@ -73,9 +105,11 @@ button:focus-visible {
     color: var(--color-text-dark);
     background-color: var(--color-background-light);
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: var(--color-button-background-light);
   }
