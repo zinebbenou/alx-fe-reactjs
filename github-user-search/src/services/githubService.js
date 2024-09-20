@@ -12,11 +12,13 @@ export const fetchUserData = async (username) => {
     }
 };
 
-export const searchUsers = async (query) => {
+export const searchUsers = async (query, location, minRepos) => {
     try {
         const response = await axios.get(`${API_URL}search/users`, {
             params: {
                 q: query,
+                location: location,
+                minRepos: minRepos,
             },
         });
         return response.data.items;
