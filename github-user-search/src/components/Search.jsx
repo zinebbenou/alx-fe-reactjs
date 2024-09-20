@@ -16,7 +16,7 @@ const Search = () => {
       const data = await githubService.fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError("Looks like we can't find the user"); // Ensure error message is set
+      setError("Looks like we cant find the user"); // Ensure error message is set
     }
     setLoading(false);
   };
