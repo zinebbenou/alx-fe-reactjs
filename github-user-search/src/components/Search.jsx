@@ -17,7 +17,7 @@ const Search = () => {
       const data = await githubService.fetchUserData(username, location, minRepos);
       setUserData(data.items); // Adjust based on response structure
     } catch (err) {
-      setError("Looks like we cant find any users.");
+      setError("Looks like we cant find the user.");
     }
     setLoading(false);
   };
