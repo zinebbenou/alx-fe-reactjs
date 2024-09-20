@@ -3,44 +3,68 @@ import githubService from '../services/githubService';
 
 const Search = () => {
   const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(''); // Clear previous errors
-    setUserData(null); // Reset userData on new search
+    setError('');
     try {
-      const data = await githubService.fetchUserData(username);
-      setUserData(data);
+      const data = await githubService.fetchUsers(username, location, minRepos);
+      setUserData(data.items); // Adjust based on response structure
     } catch (err) {
-      setError("Looks like we cant find the user"); // Ensure error message is set
+      setError("Looks like we cant find any users.");
     }
     setLoading(false);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-md mx-auto p-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="Enter GitHub username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="w-full p-2 border rounded"
           required
         />
-        <button type="submit" disabled={loading}>
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-full p-2 border rounded"
+        />
+        <input
+          type="number"
+          placeholder="Minimum Repositories"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="w-full p-2 border rounded"
+        />
+        <button type="submit" disabled={loading} className="w-full bg-blue-500 text-white p-2 rounded">
           {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {userData && (
-        <div>
-          <h2>User Data:</h2>
-          <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} width="100" />
-          <p>Username: {userData.login}</p>
+      {error && <p className="text-red-500">{error}</p>}
+      {userData.length > 0 && (
+        <div className="mt-4">
+          <h2 className="text-xl">Search Results:</h2>
+          <ul>
+            {userData.map(user => (
+              <li key={user.id} className="border p-2 my-2">
+                <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                  <img src={user.avatar_url} alt={user.login} className="w-10 h-10 rounded-full" />
+                  <span>{user.login}</span> - {user.location || 'No location'} - Repos: {user.public_repos}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
