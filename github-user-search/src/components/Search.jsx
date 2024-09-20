@@ -5,12 +5,12 @@ const Search = () => {
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setError(''); // Clear previous errors
     setUserData(null); // Reset userData on new search
     try {
       const data = await githubService.fetchUserData(username);
