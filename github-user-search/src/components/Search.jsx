@@ -11,12 +11,12 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setUserData(null); // Reset userData on new search
     try {
       const data = await githubService.fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError('Looks like we can\'t find the user');
-      setUserData(null); // Reset userData on error
+      setError("Looks like we can't find the user"); // Ensure error message is set
     }
     setLoading(false);
   };
