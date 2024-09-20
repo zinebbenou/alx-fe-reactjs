@@ -15,7 +15,8 @@ const Search = () => {
       const data = await githubService.fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError(err);
+      setError('Looks like we can\'t find the user');
+      setUserData(null); // Reset userData on error
     }
     setLoading(false);
   };
@@ -28,16 +29,18 @@ const Search = () => {
           placeholder="Enter GitHub username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <button type="submit" disabled={loading}>
           {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
-      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       {userData && (
         <div>
           <h2>User Data:</h2>
-          <pre>{JSON.stringify(userData, null, 2)}</pre>
+          <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} width="100" />
+          <p>Username: {userData.login}</p>
         </div>
       )}
     </div>
